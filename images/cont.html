@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>Black Day</title>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="description" content="Colo Shop Template">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- font Awesome Cdn -->
+	<script src="https://kit.fontawesome.com/e48d166edc.js" crossorigin="anonymous"></script>
+	<link rel="stylesheet" type="text/css"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+	<!-- Bootstrap cdn -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+		integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+	<!-- Owl Carousel File -->
+	<link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.2.1/owl.carousel.css">
+
+	<!-- CSS File -->
+	<link rel="stylesheet" type="text/css" href="styles/style.css">
+
+</style>
+</head>
+
+<body>
+    
+    <section class="bg-light container mt-4 mb-4">
+        <form class="form-horizontal">
+            <div class="form-group">
+                <label class="control-label col-sm-2" for="username">Name :</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="name" placeholder="Enter Name " required>
+                    <span id="errname"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-2" for="email">Email :</label>
+                <div class="col-sm-10">
+                    <input type="email" class="form-control" id="email" placeholder="Enter email" required>
+                    <span id="erremail"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-2" for="Gender">Gender:</label>
+                <div class="form-check-inline">
+
+                    <label class="form-check-label">
+                        <input type="radio" class="form-check-input" name="optradio" required>Male
+                    </label>
+                </div>
+                <div class="form-check-inline">
+                    <label class="form-check-label">
+                        <input type="radio" class="form-check-input" name="optradio" required>Female
+                    </label>
+                </div>
+                <span id="errgender"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-2" for="username">Contact No :</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="contact" placeholder="Enter Number " required>
+                    <span id="errcontact"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-2" for="email">Address :</label>
+                <div class="col-sm-10">
+                    <textarea class="form-control status-box" rows="3" id="addr"
+                        placeholder="Enter your address here..." required></textarea>
+                    <span id="erraddr"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-2" for="username">Comment :</label>
+                <div class="col-sm-10">
+                    <textarea class="form-control status-box" rows="3" id="comm"
+                        placeholder="Enter your comment here..." onchange="valFun()" required></textarea>
+                    <span id="errcomm"></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <div class="checkbox">
+                        <label><input type="checkbox"> Remember me</label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button id="submit" type="submit" onclick="submit()" class="btn btn-success">Submit</button>
+                    <button type="reset" class="btn border">Reset</button>
+                </div>
+            </div>
+        </form>
+        <span id="successmsg" class="container text-center"></span>
+    </section>
+
+
+   
+
+
+<!-- validation script -->
+<script>
+    document.getElementById('submit').disabled = true;
+    function valFun() {
+        var name = document.getElementById('name').value;
+        var email = document.getElementById('email').value;
+        var mobile = document.getElementById('contact').value;
+        var address = document.getElementById('addr').value;
+        var comment = document.getElementById('comm').value;
+        var regname = /^[a-zA-Z ]{2,100}$/;
+        var regmob = /^[6-9][0-9]{9}$/;
+        var regemail = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+        var regaddr = /^[a-zA-Z0-9\s,.'-]{3,}$/;
+        var regcomm = /^[a-zA-Z0-9\s,.'-]{3,50}$/;
+
+        if (!(regname.test(name))) {
+            document.getElementById('errname').innerHTML = " **Only Alphabets required !"
+            document.getElementById('errname').style.color = 'red'
+            document.getElementById('name').focus();
+            return false;
+        }
+        else if (!(regemail.test(email))){
+            document.getElementById('erremail').innerHTML = " **Enter correct email id !"
+            document.getElementById('erremail').style.color = 'red'
+            document.getElementById('email').focus();
+            return false;
+        }
+        else if (!(regmob.test(mobile))) {
+            document.getElementById('errcontact').innerHTML = " **Enter valid Number !"
+            document.getElementById('errcontact').style.color = 'red'
+            document.getElementById('contact').focus();
+            return false;
+        }
+        else if (!(regaddr.test(address))) {
+            document.getElementById('erraddr').innerHTML = " **Enter Valid address ! for e.g., House No.- 70"
+            document.getElementById('erraddr').style.color = 'red'
+            document.getElementById('addr').focus();
+            return false;
+        }
+        else if (!(regcomm.test(comment))) {
+            document.getElementById('errcomm').innerHTML = " **Comment too short !"
+            document.getElementById('errcomm').style.color = 'red'
+            document.getElementById('comm').focus();
+            return false;
+        }
+        else {
+            document.getElementById('submit').disabled = false;
+            // alert("form submitted !")
+        }
+    }
+    function submit() {
+        var mob = document.getElementById('contact').value;
+        alert(" Form Submitted Successfully ! We will reach you soon on " +mob+ " till then Stay tuned !");
+        
+    }
+</script>
+
+</body>
+</html>
